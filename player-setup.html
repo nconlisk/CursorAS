@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Player Setup - Among Us Tasks</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/player-setup.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body class="task-page">
+    <div class="setup-container">
+        <header class="header">
+            <h1 class="title">AMONG US</h1>
+            <h2 class="subtitle">GAME SETUP</h2>
+        </header>
+
+        <div class="setup-sections">
+            <!-- Game Configuration -->
+            <div class="setup-section" id="gameConfig">
+                <h3 class="section-title">🎮 Game Configuration</h3>
+                <div class="config-grid">
+                    <div class="config-item">
+                        <label for="playerCount">Number of Players:</label>
+                        <div class="number-selector">
+                            <button class="number-btn" id="decreasePlayer">-</button>
+                            <span class="number-display" id="playerCount">4</span>
+                            <button class="number-btn" id="increasePlayer">+</button>
+                        </div>
+                    </div>
+                    <div class="config-item">
+                        <label>Impostors:</label>
+                        <span class="impostor-count" id="impostorCount">1</span>
+                    </div>
+                </div>
+                <button class="action-btn" id="generateRoles">🎲 Generate Player Roles</button>
+            </div>
+
+            <!-- Player List -->
+            <div class="setup-section" id="playerList" style="display: none;">
+                <h3 class="section-title">👥 Player Assignments</h3>
+                <div class="players-grid" id="playersGrid"></div>
+                <div class="setup-actions">
+                    <button class="action-btn secondary" id="regenerateRoles">🔄 Regenerate Roles</button>
+                    <button class="action-btn primary" id="startGame">🚀 Start Game</button>
+                </div>
+            </div>
+
+            <!-- Player Login -->
+            <div class="setup-section" id="playerLogin" style="display: none;">
+                <h3 class="section-title">🔐 Player Login</h3>
+                <p class="login-instruction">Enter your assigned Player ID to join the game:</p>
+                <div class="login-form">
+                    <select id="playerSelect" class="player-select">
+                        <option value="">Select Your Player ID</option>
+                    </select>
+                    <button class="action-btn primary" id="loginPlayer">Enter Game</button>
+                </div>
+                <div class="current-role" id="currentRole" style="display: none;"></div>
+            </div>
+        </div>
+
+        <!-- Emergency Meeting Panel -->
+        <div class="emergency-panel">
+            <button class="emergency-btn" id="emergencyMeeting">
+                🚨 EMERGENCY MEETING
+            </button>
+        </div>
+
+        <!-- Admin Panel -->
+        <div class="admin-panel">
+            <button class="admin-btn" id="resetGame">Reset Game</button>
+            <button class="admin-btn" id="viewProgress">View All Progress</button>
+        </div>
+    </div>
+
+    <!-- Meeting Modal -->
+    <div class="meeting-modal" id="meetingModal" style="display: none;">
+        <div class="meeting-content">
+            <h2>🚨 EMERGENCY MEETING</h2>
+            <p>All players must stop what they're doing and gather for discussion!</p>
+            <div class="meeting-actions">
+                <button class="action-btn primary" id="endMeeting">End Meeting</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/multiplayer.js"></script>
+    <script src="js/player-setup.js"></script>
+</body>
+</html>

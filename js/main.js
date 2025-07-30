@@ -155,6 +155,12 @@ class BaseTask {
             console.error('Error saving task completion:', e);
         }
 
+        // Update multiplayer progress if player is logged in
+        if (window.multiplayerManager && window.multiplayerManager.getCurrentPlayer()) {
+            const currentPlayer = window.multiplayerManager.getCurrentPlayer();
+            window.multiplayerManager.updatePlayerProgress(currentPlayer.id, this.taskId);
+        }
+
         // Show completion message
         this.showCompletionMessage();
 
