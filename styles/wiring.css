@@ -144,6 +144,38 @@
     }
 }
 
+@keyframes sparkle {
+    0%, 100% {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.5);
+    }
+}
+
+.wire-group {
+    filter: drop-shadow(0 0 3px currentColor);
+}
+
+.spark {
+    animation: sparkle 1.5s ease-in-out infinite;
+}
+
+.wire-glow {
+    animation: wireGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes wireGlow {
+    0% {
+        opacity: 0.2;
+    }
+    100% {
+        opacity: 0.5;
+    }
+}
+
 /* Mobile optimizations */
 @media (max-width: 768px) {
     .wiring-panel {

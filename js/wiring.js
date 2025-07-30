@@ -133,20 +133,101 @@ class WiringTask extends BaseTask {
 
     drawWire(startX, startY, endX, endY, color) {
         const svg = document.querySelector('.wire-svg');
+        
+        // Create wire group for better organization
+        const wireGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+        wireGroup.classList.add('wire-group');
+        
+        // Create the main wire path
         const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
         
-        // Create a curved path
+        // Create a more realistic curved path with multiple control points
         const midX = (startX + endX) / 2;
-        const controlX1 = startX + (midX - startX) * 0.5;
-        const controlX2 = endX - (endX - midX) * 0.5;
+        const variance = Math.random() * 40 - 20; // Add some randomness to wire path
+        const controlX1 = startX + (midX - startX) * 0.3;
+        const controlY1 = startY + variance;
+        const controlX2 = endX - (endX - midX) * 0.3;
+        const controlY2 = endY + variance;
         
-        const pathData = `M ${startX} ${startY} C ${controlX1} ${startY}, ${controlX2} ${endY}, ${endX} ${endY}`;
+        const pathData = `M ${startX} ${startY} C ${controlX1} ${controlY1}, ${controlX2} ${controlY2}, ${endX} ${endY}`;
         
         path.setAttribute('d', pathData);
         path.setAttribute('stroke', this.colorMap[color]);
+        path.setAttribute('stroke-width', '6');
+        path.setAttribute('fill', 'none');
+        path.setAttribute('stroke-linecap', 'round');
         path.classList.add('wire-line', 'connected');
         
-        svg.appendChild(path);
+        // Add wire glow effect
+        const glowPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        glowPath.setAttribute('d', pathData);
+        glowPath.setAttribute('stroke', this.colorMap[color]);
+        glowPath.setAttribute('stroke-width', '12');
+        glowPath.setAttribute('fill', 'none');
+        glowPath.setAttribute('stroke-linecap', 'round');
+        glowPath.setAttribute('opacity', '0.3');
+        glowPath.setAttribute('filter', 'url(#glow)');
+        glowPath.classList.add('wire-glow');
+        
+        // Add electrical spark animation
+        const sparkGroup = this.createElectricalSparks(startX, startY, endX, endY, color);
+        
+        // Assemble the wire
+        wireGroup.appendChild(glowPath);
+        wireGroup.appendChild(path);
+        wireGroup.appendChild(sparkGroup);
+        
+        svg.appendChild(wireGroup);
+        
+        // Animate the wire connection
+        this.animateWireConnection(path);
+    }
+
+    createElectricalSparks(startX, startY, endX, endY, color) {
+        const sparkGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+        sparkGroup.classList.add('electrical-sparks');
+        
+        // Create small spark circles along the wire path
+        for (let i = 0; i < 3; i++) {
+            const progress = (i + 1) / 4; // Position along the wire
+            const sparkX = startX + (endX - startX) * progress;
+            const sparkY = startY + (endY - startY) * progress;
+            
+            const spark = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+            spark.setAttribute('cx', sparkX);
+            spark.setAttribute('cy', sparkY);
+            spark.setAttribute('r', '2');
+            spark.setAttribute('fill', this.colorMap[color]);
+            spark.setAttribute('opacity', '0');
+            spark.classList.add('spark');
+            
+            // Animate spark
+            spark.style.animation = `sparkle 1.5s ease-in-out infinite`;
+            spark.style.animationDelay = `${i * 0.3}s`;
+            
+            sparkGroup.appendChild(spark);
+        }
+        
+        return sparkGroup;
+    }
+
+    animateWireConnection(path) {
+        const pathLength = path.getTotalLength();
+        
+        // Set up the starting positions
+        path.style.strokeDasharray = pathLength + ' ' + pathLength;
+        path.style.strokeDashoffset = pathLength;
+        
+        // Trigger the animation
+        path.getBoundingClientRect(); // Force reflow
+        path.style.transition = 'stroke-dashoffset 0.8s ease-in-out';
+        path.style.strokeDashoffset = '0';
+        
+        // After animation, remove dash properties for clean wire
+        setTimeout(() => {
+            path.style.strokeDasharray = 'none';
+            path.style.transition = '';
+        }, 800);
     }
 
     highlightCompatibleEnds() {

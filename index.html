@@ -102,8 +102,98 @@
         </div>
 
         <button class="reset-btn" id="resetProgress">Reset All Tasks</button>
+        
+        <!-- Player Info Panel -->
+        <div class="player-info" id="playerInfo" style="display: none;">
+            <div class="player-id-display" id="playerIdDisplay"></div>
+            <div class="player-role-display" id="playerRoleDisplay"></div>
+        </div>
+        
+        <!-- Multiplayer Controls -->
+        <div class="multiplayer-controls" id="multiplayerControls" style="display: none;">
+            <button class="emergency-btn-main" id="emergencyMeetingMain">
+                🚨 EMERGENCY MEETING
+            </button>
+            <button class="setup-btn" onclick="window.location.href='player-setup.html'">
+                ⚙️ Game Setup
+            </button>
+        </div>
     </div>
 
+    <script src="js/multiplayer.js"></script>
     <script src="js/main.js"></script>
+    <script>
+        // Initialize multiplayer integration
+        document.addEventListener('DOMContentLoaded', () => {
+            // Check if player is logged in
+            const currentPlayer = window.multiplayerManager.getCurrentPlayer();
+            if (currentPlayer && window.multiplayerManager.isGameActive()) {
+                // Show player info
+                const playerInfo = document.getElementById('playerInfo');
+                const playerIdDisplay = document.getElementById('playerIdDisplay');
+                const playerRoleDisplay = document.getElementById('playerRoleDisplay');
+                const multiplayerControls = document.getElementById('multiplayerControls');
+                
+                playerIdDisplay.textContent = `Player: ${currentPlayer.id}`;
+                playerRoleDisplay.textContent = currentPlayer.role === 'impostor' ? '🔴 IMPOSTOR' : '👥 CREWMATE';
+                playerRoleDisplay.className = `player-role-display ${currentPlayer.role}`;
+                
+                playerInfo.style.display = 'block';
+                multiplayerControls.style.display = 'block';
+                
+                // Hide/show tasks based on role
+                if (currentPlayer.role === 'impostor') {
+                    document.querySelectorAll('.task-btn').forEach(btn => {
+                        btn.style.opacity = '0.5';
+                        btn.style.pointerEvents = 'none';
+                    });
+                    
+                    // Add impostor message
+                    const impostorMessage = document.createElement('div');
+                    impostorMessage.style.cssText = `
+                        text-align: center;
+                        color: #ff4757;
+                        font-size: 1.2rem;
+                        font-weight: bold;
+                        margin: 20px 0;
+                        padding: 15px;
+                        background: rgba(255, 71, 87, 0.1);
+                        border: 2px solid #ff4757;
+                        border-radius: 10px;
+                    `;
+                    impostorMessage.textContent = 'You are the IMPOSTOR! Sabotage the crew and blend in.';
+                    document.querySelector('.task-grid').prepend(impostorMessage);
+                }
+            } else {
+                // Show setup button for game admin
+                const setupBtn = document.createElement('button');
+                setupBtn.textContent = '🎮 Start Multiplayer Game';
+                setupBtn.className = 'setup-btn-main';
+                setupBtn.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+                    border: none;
+                    border-radius: 15px;
+                    color: white;
+                    font-family: 'Orbitron', monospace;
+                    font-size: 1rem;
+                    font-weight: 600;
+                    padding: 15px 25px;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                    z-index: 1000;
+                `;
+                setupBtn.onclick = () => window.location.href = 'player-setup.html';
+                document.body.appendChild(setupBtn);
+            }
+            
+            // Emergency meeting button
+            document.getElementById('emergencyMeetingMain')?.addEventListener('click', () => {
+                window.multiplayerManager.callEmergencyMeeting(currentPlayer?.id);
+            });
+        });
+    </script>
 </body>
 </html>

@@ -337,3 +337,122 @@ body {
         opacity: 1;
     }
 }
+
+/* Multiplayer UI Elements */
+.player-info {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background: rgba(0, 0, 0, 0.8);
+    border: 2px solid #70a1ff;
+    border-radius: 15px;
+    padding: 15px 20px;
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+}
+
+.player-id-display {
+    color: #70a1ff;
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+}
+
+.player-role-display {
+    font-weight: bold;
+    font-size: 1rem;
+    padding: 5px 10px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.player-role-display.crewmate {
+    background: rgba(112, 161, 255, 0.2);
+    color: #70a1ff;
+    border: 1px solid #70a1ff;
+}
+
+.player-role-display.impostor {
+    background: rgba(255, 71, 87, 0.2);
+    color: #ff4757;
+    border: 1px solid #ff4757;
+}
+
+.multiplayer-controls {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 1000;
+}
+
+.emergency-btn-main {
+    background: linear-gradient(135deg, #ff4757 0%, #e74c3c 100%);
+    border: none;
+    border-radius: 15px;
+    color: white;
+    font-family: 'Orbitron', monospace;
+    font-size: 1rem;
+    font-weight: 700;
+    padding: 15px 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 20px rgba(255, 71, 87, 0.4);
+    animation: pulse 2s infinite;
+    touch-action: manipulation;
+    min-width: 200px;
+}
+
+.emergency-btn-main:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 30px rgba(255, 71, 87, 0.6);
+}
+
+.setup-btn {
+    background: linear-gradient(135deg, #7f8c8d 0%, #6c7b7d 100%);
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-family: 'Orbitron', monospace;
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    touch-action: manipulation;
+}
+
+.setup-btn:hover {
+    background: linear-gradient(135deg, #70a1ff 0%, #5352ed 100%);
+    transform: translateY(-2px);
+}
+
+/* Mobile adjustments for multiplayer UI */
+@media (max-width: 768px) {
+    .player-info {
+        top: 10px;
+        left: 10px;
+        padding: 12px 15px;
+    }
+    
+    .player-id-display {
+        font-size: 1rem;
+    }
+    
+    .player-role-display {
+        font-size: 0.9rem;
+    }
+    
+    .multiplayer-controls {
+        bottom: 10px;
+        left: 10px;
+    }
+    
+    .emergency-btn-main {
+        padding: 12px 15px;
+        font-size: 0.9rem;
+        min-width: 150px;
+    }
+}
