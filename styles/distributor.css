@@ -1,0 +1,159 @@
+.distributor-panel {
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+    border: 4px solid #7f8c8d;
+    border-radius: 20px;
+    padding: 40px;
+    max-width: 700px;
+    width: 100%;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+.dial-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.power-dial {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.dial-background {
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, #1a1a1a 30%, #333 100%);
+    border-radius: 50%;
+    border: 4px solid #555;
+    position: relative;
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.dial-needle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 4px;
+    height: 50px;
+    background: linear-gradient(180deg, #ff4757 0%, #e74c3c 100%);
+    transform-origin: bottom center;
+    transform: translate(-50%, -100%) rotate(0deg);
+    border-radius: 2px;
+    transition: transform 0.3s ease;
+    box-shadow: 0 0 10px rgba(255, 71, 87, 0.5);
+}
+
+.dial-target {
+    position: absolute;
+    top: 15px;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    background: #2ed573;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transform-origin: 50% 60px;
+    box-shadow: 0 0 15px rgba(46, 213, 115, 0.8);
+}
+
+.dial-numbers {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.dial-numbers span {
+    position: absolute;
+    color: #70a1ff;
+    font-weight: bold;
+    font-size: 1.1rem;
+    transform: translate(-50%, -50%);
+}
+
+.dial-numbers span:nth-child(1) { /* 0 */
+    top: 10%;
+    left: 50%;
+}
+
+.dial-numbers span:nth-child(2) { /* 1 */
+    top: 50%;
+    right: 10%;
+}
+
+.dial-numbers span:nth-child(3) { /* 2 */
+    bottom: 10%;
+    left: 50%;
+}
+
+.dial-numbers span:nth-child(4) { /* 3 */
+    top: 50%;
+    left: 10%;
+}
+
+.power-dial.aligned .dial-needle {
+    background: linear-gradient(180deg, #2ed573 0%, #27ae60 100%);
+    box-shadow: 0 0 10px rgba(46, 213, 115, 0.8);
+}
+
+.status-display {
+    background: #1a1a1a;
+    border: 2px solid #555;
+    border-radius: 15px;
+    padding: 25px;
+    text-align: center;
+}
+
+.power-level {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.3rem;
+    color: #70a1ff;
+    margin-bottom: 15px;
+}
+
+.calibration-status {
+    font-size: 1.1rem;
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.calibration-status.success {
+    color: #2ed573;
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+    .distributor-panel {
+        padding: 20px;
+    }
+    
+    .dial-container {
+        gap: 20px;
+    }
+    
+    .power-dial {
+        width: 120px;
+        height: 120px;
+    }
+    
+    .dial-needle {
+        height: 40px;
+    }
+    
+    .dial-target {
+        transform-origin: 50% 48px;
+    }
+    
+    .dial-numbers span {
+        font-size: 1rem;
+    }
+}

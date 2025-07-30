@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Fuel-engines - Among Us Tasks</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body class="task-page">
+    <div class="task-header">
+        <h1 class="task-title">FUEL-ENGINES</h1>
+        <p class="task-instruction">Click to complete this task</p>
+    </div>
+    <div style="text-align: center; margin-top: 100px;">
+        <button id="completeBtn" style="padding: 20px 40px; font-size: 1.5rem; background: #2ed573; color: white; border: none; border-radius: 15px; cursor: pointer;">Complete Task</button>
+    </div>
+    <script src="../js/main.js"></script>
+    <script>document.addEventListener('DOMContentLoaded', () => { const task = new BaseTask('fuel-engines'); document.getElementById('completeBtn').addEventListener('click', () => task.completeTask()); });</script>
+</body>
+</html>

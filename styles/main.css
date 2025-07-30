@@ -1,0 +1,339 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Orbitron', monospace;
+    background: linear-gradient(135deg, #0a0a1a 0%, #1a1a2e 50%, #16213e 100%);
+    color: #ffffff;
+    min-height: 100vh;
+    touch-action: manipulation;
+    user-select: none;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header styles */
+.header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding: 20px 0;
+}
+
+.title {
+    font-size: clamp(2.5rem, 8vw, 4rem);
+    font-weight: 900;
+    color: #ff4757;
+    text-shadow: 0 0 20px rgba(255, 71, 87, 0.5);
+    margin-bottom: 10px;
+    letter-spacing: 4px;
+}
+
+.subtitle {
+    font-size: clamp(1rem, 3vw, 1.5rem);
+    font-weight: 400;
+    color: #70a1ff;
+    letter-spacing: 2px;
+}
+
+/* Task grid */
+.task-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    flex-grow: 1;
+    margin-bottom: 40px;
+}
+
+.task-category {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 25px;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(112, 161, 255, 0.3);
+    transition: all 0.3s ease;
+}
+
+.task-category:hover {
+    transform: translateY(-5px);
+    border-color: rgba(112, 161, 255, 0.6);
+    box-shadow: 0 10px 30px rgba(112, 161, 255, 0.2);
+}
+
+.task-category h3 {
+    color: #70a1ff;
+    font-size: 1.4rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+}
+
+.task-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Task button styles */
+.task-btn {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 20px 25px;
+    background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+    border: none;
+    border-radius: 15px;
+    color: white;
+    font-family: 'Orbitron', monospace;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    min-height: 70px;
+    touch-action: manipulation;
+}
+
+.task-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(52, 152, 219, 0.4);
+}
+
+.task-btn:active {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(52, 152, 219, 0.6);
+}
+
+.task-btn.completed {
+    background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+    box-shadow: 0 5px 20px rgba(46, 204, 113, 0.3);
+}
+
+.task-btn.completed::after {
+    content: '✓';
+    position: absolute;
+    right: 20px;
+    font-size: 1.5rem;
+    color: #ffffff;
+}
+
+.task-icon {
+    font-size: 2rem;
+    min-width: 50px;
+    text-align: center;
+}
+
+.task-name {
+    flex-grow: 1;
+    text-align: left;
+    letter-spacing: 1px;
+}
+
+/* Progress bar */
+.progress-bar {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50px;
+    height: 60px;
+    position: relative;
+    margin-bottom: 30px;
+    border: 2px solid rgba(112, 161, 255, 0.3);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.progress-fill {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    background: linear-gradient(90deg, #ff4757 0%, #ff6b7a 50%, #ff9ff3 100%);
+    border-radius: 50px;
+    transition: width 0.5s ease;
+    width: 0%;
+}
+
+.progress-text {
+    position: relative;
+    z-index: 2;
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: #ffffff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+/* Reset button */
+.reset-btn {
+    background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+    border: none;
+    border-radius: 15px;
+    color: white;
+    font-family: 'Orbitron', monospace;
+    font-size: 1.1rem;
+    font-weight: 600;
+    padding: 15px 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    align-self: center;
+    min-height: 60px;
+    min-width: 200px;
+    touch-action: manipulation;
+}
+
+.reset-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(231, 76, 60, 0.4);
+}
+
+.reset-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 3px 10px rgba(231, 76, 60, 0.6);
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+    
+    .task-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .task-category {
+        padding: 20px;
+    }
+    
+    .task-btn {
+        padding: 25px 20px;
+        min-height: 80px;
+        font-size: 1rem;
+    }
+    
+    .task-icon {
+        font-size: 2.5rem;
+        min-width: 60px;
+    }
+    
+    .progress-bar {
+        height: 70px;
+    }
+    
+    .progress-text {
+        font-size: 1.1rem;
+    }
+}
+
+/* Extra large touch targets for tablets */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .task-btn {
+        min-height: 85px;
+        padding: 25px 30px;
+    }
+    
+    .task-icon {
+        font-size: 2.2rem;
+    }
+}
+
+/* Task page common styles */
+.task-page {
+    background: linear-gradient(135deg, #0a0a1a 0%, #1a1a2e 50%, #16213e 100%);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.task-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.task-title {
+    font-size: clamp(1.8rem, 6vw, 3rem);
+    color: #70a1ff;
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+}
+
+.task-instruction {
+    font-size: clamp(1rem, 3vw, 1.3rem);
+    color: #ffffff;
+    opacity: 0.8;
+}
+
+.back-btn {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(112, 161, 255, 0.3);
+    border-radius: 15px;
+    color: white;
+    font-family: 'Orbitron', monospace;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 15px 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    min-height: 60px;
+    touch-action: manipulation;
+}
+
+.back-btn:hover {
+    background: rgba(112, 161, 255, 0.2);
+    border-color: rgba(112, 161, 255, 0.6);
+    transform: translateY(-2px);
+}
+
+.task-complete {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(46, 204, 113, 0.95);
+    color: white;
+    padding: 30px 50px;
+    border-radius: 20px;
+    font-size: 2rem;
+    font-weight: 700;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    border: 3px solid #27ae60;
+    box-shadow: 0 10px 40px rgba(46, 204, 113, 0.4);
+    z-index: 1000;
+    animation: celebrate 0.6s ease-out;
+}
+
+@keyframes celebrate {
+    0% {
+        transform: translate(-50%, -50%) scale(0.5);
+        opacity: 0;
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.1);
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+}
