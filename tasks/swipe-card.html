@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Swipe Card - Among Us Tasks</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/swipe-card.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body class="task-page">
+    <div class="task-header">
+        <h1 class="task-title">SWIPE CARD</h1>
+        <p class="task-instruction">Swipe your card at the correct speed</p>
+    </div>
+
+    <div class="card-reader">
+        <div class="reader-display">
+            <div class="status-line" id="statusText">Please insert card</div>
+            <div class="speed-indicator">
+                <div class="speed-bar">
+                    <div class="speed-fill" id="speedFill"></div>
+                    <div class="speed-target"></div>
+                </div>
+                <div class="speed-labels">
+                    <span>TOO SLOW</span>
+                    <span>GOOD</span>
+                    <span>TOO FAST</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card-slot">
+            <div class="slot-guide"></div>
+            <div class="magnetic-strip"></div>
+        </div>
+        
+        <div class="card-area">
+            <div class="id-card" id="idCard">
+                <div class="card-header">
+                    <span class="card-title">CREW ID</span>
+                    <span class="card-number">#2847</span>
+                </div>
+                <div class="card-photo">
+                    <div class="photo-placeholder">👤</div>
+                </div>
+                <div class="card-info">
+                    <div class="card-name">CREWMATE</div>
+                    <div class="card-details">
+                        <div>CLEARANCE: ALL</div>
+                        <div>ISSUED: 2024</div>
+                    </div>
+                </div>
+                <div class="magnetic-strip-card"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="instructions">
+        <p>Drag the card through the slot at a steady, moderate speed</p>
+        <p>Not too fast, not too slow!</p>
+    </div>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/swipe-card.js"></script>
+</body>
+</html>

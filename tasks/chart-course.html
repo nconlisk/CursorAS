@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Chart Course - Among Us Tasks</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/chart-course.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body class="task-page">
+    <div class="task-header">
+        <h1 class="task-title">CHART COURSE</h1>
+        <p class="task-instruction">Drag the ship to match the destination path</p>
+    </div>
+
+    <div class="navigation-panel">
+        <div class="star-map">
+            <div class="destination-path" id="destinationPath"></div>
+            <div class="ship-path" id="shipPath"></div>
+            <div class="ship" id="ship">🚀</div>
+            <div class="destination" id="destination">⭐</div>
+            
+            <!-- Background stars -->
+            <div class="stars"></div>
+        </div>
+        
+        <div class="nav-controls">
+            <button class="nav-btn" id="resetPath">Reset Path</button>
+            <div class="course-status" id="courseStatus">
+                Drag the ship to chart your course
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/chart-course.js"></script>
+</body>
+</html>

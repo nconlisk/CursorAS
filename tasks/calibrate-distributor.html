@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Calibrate Distributor - Among Us Tasks</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/distributor.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body class="task-page">
+    <div class="task-header">
+        <h1 class="task-title">CALIBRATE DISTRIBUTOR</h1>
+        <p class="task-instruction">Rotate the dials to align with the indicators</p>
+    </div>
+
+    <div class="distributor-panel">
+        <div class="dial-container">
+            <div class="power-dial" data-dial="1">
+                <div class="dial-background"></div>
+                <div class="dial-needle"></div>
+                <div class="dial-target" data-angle="45"></div>
+                <div class="dial-numbers">
+                    <span style="--pos: 0">0</span>
+                    <span style="--pos: 1">1</span>
+                    <span style="--pos: 2">2</span>
+                    <span style="--pos: 3">3</span>
+                </div>
+            </div>
+            
+            <div class="power-dial" data-dial="2">
+                <div class="dial-background"></div>
+                <div class="dial-needle"></div>
+                <div class="dial-target" data-angle="135"></div>
+                <div class="dial-numbers">
+                    <span style="--pos: 0">0</span>
+                    <span style="--pos: 1">1</span>
+                    <span style="--pos: 2">2</span>
+                    <span style="--pos: 3">3</span>
+                </div>
+            </div>
+            
+            <div class="power-dial" data-dial="3">
+                <div class="dial-background"></div>
+                <div class="dial-needle"></div>
+                <div class="dial-target" data-angle="225"></div>
+                <div class="dial-numbers">
+                    <span style="--pos: 0">0</span>
+                    <span style="--pos: 1">1</span>
+                    <span style="--pos: 2">2</span>
+                    <span style="--pos: 3">3</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="status-display">
+            <div class="power-level">
+                <span>POWER LEVEL:</span>
+                <span id="powerLevel">0%</span>
+            </div>
+            <div class="calibration-status" id="calibrationStatus">
+                Awaiting calibration...
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/distributor.js"></script>
+</body>
+</html>

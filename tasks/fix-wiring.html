@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Fix Wiring - Among Us Tasks</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/wiring.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body class="task-page">
+    <div class="task-header">
+        <h1 class="task-title">FIX WIRING</h1>
+        <p class="task-instruction">Connect the colored wires to their matching terminals</p>
+    </div>
+
+    <div class="wiring-panel">
+        <div class="wire-container">
+            <div class="wire-start-section">
+                <div class="wire-start" data-color="red" data-wire="1">
+                    <div class="wire-connector red"></div>
+                </div>
+                <div class="wire-start" data-color="blue" data-wire="2">
+                    <div class="wire-connector blue"></div>
+                </div>
+                <div class="wire-start" data-color="yellow" data-wire="3">
+                    <div class="wire-connector yellow"></div>
+                </div>
+                <div class="wire-start" data-color="green" data-wire="4">
+                    <div class="wire-connector green"></div>
+                </div>
+            </div>
+
+            <div class="wire-paths">
+                <svg class="wire-svg" viewBox="0 0 400 300">
+                    <defs>
+                        <filter id="glow">
+                            <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                            <feMerge> 
+                                <feMergeNode in="coloredBlur"/>
+                                <feMergeNode in="SourceGraphic"/>
+                            </feMerge>
+                        </filter>
+                    </defs>
+                </svg>
+            </div>
+
+            <div class="wire-end-section">
+                <div class="wire-end" data-color="blue" data-wire="2">
+                    <div class="wire-connector blue"></div>
+                </div>
+                <div class="wire-end" data-color="green" data-wire="4">
+                    <div class="wire-connector green"></div>
+                </div>
+                <div class="wire-end" data-color="red" data-wire="1">
+                    <div class="wire-connector red"></div>
+                </div>
+                <div class="wire-end" data-color="yellow" data-wire="3">
+                    <div class="wire-connector yellow"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="task-progress">
+        <span id="wiresConnected">0</span>/4 wires connected
+    </div>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/wiring.js"></script>
+</body>
+</html>

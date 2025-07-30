@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Among Us Task Simulator</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 class="title">AMONG US</h1>
+            <h2 class="subtitle">TASK SIMULATOR</h2>
+        </header>
+        
+        <main class="task-grid">
+            <div class="task-category">
+                <h3>ELECTRICAL</h3>
+                <div class="task-buttons">
+                    <button class="task-btn" data-task="fix-wiring">
+                        <span class="task-icon">⚡</span>
+                        <span class="task-name">Fix Wiring</span>
+                    </button>
+                    <button class="task-btn" data-task="calibrate-distributor">
+                        <span class="task-icon">🔌</span>
+                        <span class="task-name">Calibrate Distributor</span>
+                    </button>
+                    <button class="task-btn" data-task="divert-power">
+                        <span class="task-icon">⚡</span>
+                        <span class="task-name">Divert Power</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="task-category">
+                <h3>NAVIGATION</h3>
+                <div class="task-buttons">
+                    <button class="task-btn" data-task="chart-course">
+                        <span class="task-icon">🧭</span>
+                        <span class="task-name">Chart Course</span>
+                    </button>
+                    <button class="task-btn" data-task="stabilize-steering">
+                        <span class="task-icon">🎯</span>
+                        <span class="task-name">Stabilize Steering</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="task-category">
+                <h3>ENGINES</h3>
+                <div class="task-buttons">
+                    <button class="task-btn" data-task="align-engine">
+                        <span class="task-icon">🔧</span>
+                        <span class="task-name">Align Engine Output</span>
+                    </button>
+                    <button class="task-btn" data-task="fuel-engines">
+                        <span class="task-icon">⛽</span>
+                        <span class="task-name">Fuel Engines</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="task-category">
+                <h3>MEDICAL & SECURITY</h3>
+                <div class="task-buttons">
+                    <button class="task-btn" data-task="submit-scan">
+                        <span class="task-icon">🔍</span>
+                        <span class="task-name">Submit Scan</span>
+                    </button>
+                    <button class="task-btn" data-task="prime-shields">
+                        <span class="task-icon">🛡️</span>
+                        <span class="task-name">Prime Shields</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="task-category">
+                <h3>MAINTENANCE</h3>
+                <div class="task-buttons">
+                    <button class="task-btn" data-task="clean-o2-filter">
+                        <span class="task-icon">🌱</span>
+                        <span class="task-name">Clean O2 Filter</span>
+                    </button>
+                    <button class="task-btn" data-task="empty-garbage">
+                        <span class="task-icon">🗑️</span>
+                        <span class="task-name">Empty Garbage</span>
+                    </button>
+                    <button class="task-btn" data-task="swipe-card">
+                        <span class="task-icon">💳</span>
+                        <span class="task-name">Swipe Card</span>
+                    </button>
+                </div>
+            </div>
+        </main>
+
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+            <span class="progress-text" id="progressText">0/10 Tasks Complete</span>
+        </div>
+
+        <button class="reset-btn" id="resetProgress">Reset All Tasks</button>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,305 @@
+.card-reader {
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+    border: 4px solid #7f8c8d;
+    border-radius: 20px;
+    padding: 40px;
+    max-width: 600px;
+    width: 100%;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    position: relative;
+    overflow: hidden;
+}
+
+.card-reader::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #e74c3c 0%, #f39c12 50%, #27ae60 100%);
+}
+
+.reader-display {
+    background: #1a1a1a;
+    border: 2px solid #555;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 30px;
+    font-family: 'Courier New', monospace;
+}
+
+.status-line {
+    color: #70a1ff;
+    font-size: 1.4rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+    min-height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.status-line.error {
+    color: #ff4757;
+    animation: blink 0.5s infinite;
+}
+
+.status-line.success {
+    color: #2ed573;
+}
+
+.speed-indicator {
+    margin-top: 20px;
+}
+
+.speed-bar {
+    position: relative;
+    height: 30px;
+    background: #333;
+    border-radius: 15px;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.speed-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #ff4757 0%, #ffa502 30%, #2ed573 50%, #ffa502 70%, #ff4757 100%);
+    width: 0%;
+    transition: width 0.1s ease;
+    border-radius: 15px;
+}
+
+.speed-target {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20%;
+    height: 100%;
+    background: rgba(46, 213, 115, 0.3);
+    border: 2px solid #2ed573;
+    border-radius: 15px;
+}
+
+.speed-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    color: #bbb;
+}
+
+.card-slot {
+    position: relative;
+    height: 60px;
+    background: #1a1a1a;
+    border: 3px solid #555;
+    border-radius: 30px;
+    margin: 30px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.slot-guide {
+    width: 90%;
+    height: 4px;
+    background: linear-gradient(90deg, transparent 0%, #70a1ff 50%, transparent 100%);
+    position: absolute;
+    animation: scanLine 2s ease-in-out infinite;
+}
+
+.magnetic-strip {
+    position: absolute;
+    right: 20%;
+    top: 10px;
+    bottom: 10px;
+    width: 4px;
+    background: #e74c3c;
+    border-radius: 2px;
+}
+
+.card-area {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    position: relative;
+}
+
+.id-card {
+    width: 300px;
+    height: 180px;
+    background: linear-gradient(135deg, #ecf0f1 0%, #bdc3c7 100%);
+    border-radius: 15px;
+    padding: 15px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    cursor: grab;
+    user-select: none;
+    transition: all 0.3s ease;
+    position: relative;
+    border: 2px solid #95a5a6;
+}
+
+.id-card:active {
+    cursor: grabbing;
+    transform: scale(1.05);
+}
+
+.id-card.dragging {
+    z-index: 1000;
+    transform: rotate(-5deg) scale(1.1);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.card-title {
+    font-weight: bold;
+    color: #2c3e50;
+    font-size: 1rem;
+}
+
+.card-number {
+    font-family: 'Courier New', monospace;
+    color: #7f8c8d;
+    font-size: 0.9rem;
+}
+
+.card-photo {
+    width: 60px;
+    height: 60px;
+    background: #34495e;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    float: left;
+    margin-right: 15px;
+    margin-bottom: 10px;
+}
+
+.photo-placeholder {
+    font-size: 2rem;
+    color: #95a5a6;
+}
+
+.card-info {
+    overflow: hidden;
+}
+
+.card-name {
+    font-weight: bold;
+    color: #2c3e50;
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+}
+
+.card-details {
+    font-size: 0.8rem;
+    color: #7f8c8d;
+    line-height: 1.4;
+}
+
+.magnetic-strip-card {
+    position: absolute;
+    right: 10px;
+    top: 15px;
+    bottom: 15px;
+    width: 8px;
+    background: linear-gradient(180deg, #2c3e50 0%, #34495e 100%);
+    border-radius: 4px;
+}
+
+.instructions {
+    text-align: center;
+    margin-top: 40px;
+    color: #bbb;
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+.instructions p {
+    margin: 10px 0;
+}
+
+/* Animations */
+@keyframes scanLine {
+    0%, 100% {
+        opacity: 0.3;
+        transform: translateX(-100%);
+    }
+    50% {
+        opacity: 1;
+        transform: translateX(100%);
+    }
+}
+
+@keyframes blink {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.3;
+    }
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+    .card-reader {
+        padding: 20px;
+    }
+    
+    .reader-display {
+        padding: 15px;
+    }
+    
+    .status-line {
+        font-size: 1.2rem;
+    }
+    
+    .id-card {
+        width: 260px;
+        height: 160px;
+        padding: 12px;
+    }
+    
+    .card-photo {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .photo-placeholder {
+        font-size: 1.5rem;
+    }
+    
+    .card-title {
+        font-size: 0.9rem;
+    }
+    
+    .card-number {
+        font-size: 0.8rem;
+    }
+    
+    .card-name {
+        font-size: 1rem;
+    }
+    
+    .card-details {
+        font-size: 0.7rem;
+    }
+}
+
+/* Tablet optimizations */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .id-card {
+        width: 280px;
+        height: 170px;
+    }
+}
