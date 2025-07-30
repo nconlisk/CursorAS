@@ -1,0 +1,22 @@
+# MINIMAL CONFIGURATION FOR EXISTING NGINX SERVER
+# Add this to your existing server block:
+
+location /amongus/ {
+    alias /path/to/amongus-tasks/;
+    try_files $uri $uri/ /amongus/index.html;
+    index index.html;
+}
+
+# OR if you want it at the root:
+
+location / {
+    try_files $uri $uri/ /index.html;
+}
+
+# THAT'S IT! No other special configuration needed.
+
+# Optional (but recommended) - Add to your existing server block:
+location ~* \.(css|js|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|eot)$ {
+    expires 1y;
+    add_header Cache-Control "public, immutable";
+}
