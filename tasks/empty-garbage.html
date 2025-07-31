@@ -3,21 +3,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Empty-garbage - Among Us Tasks</title>
+    <title>Empty Garbage - Among Us Tasks</title>
     <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/empty-garbage.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
 </head>
 <body class="task-page">
     <div class="task-header">
-        <h1 class="task-title">EMPTY-GARBAGE</h1>
-        <p class="task-instruction">Click to complete this task</p>
+        <h1 class="task-title">WASTE DISPOSAL SYSTEM</h1>
+        <p class="task-instruction">Dispose of waste materials through the airlock</p>
     </div>
-    <div style="text-align: center; margin-top: 100px;">
-        <button id="completeBtn" style="padding: 20px 40px; font-size: 1.5rem; background: #2ed573; color: white; border: none; border-radius: 15px; cursor: pointer;">Complete Task</button>
+
+    <div class="waste-disposal-container">
+        <!-- Waste Collection Area -->
+        <div class="waste-collection">
+            <h3>WASTE BINS</h3>
+            <div class="waste-bins">
+                <div class="waste-bin" data-waste="organic">
+                    <div class="bin-icon">🥗</div>
+                    <div class="bin-label">ORGANIC</div>
+                    <div class="waste-items">
+                        <div class="waste-item" draggable="true">🍎</div>
+                        <div class="waste-item" draggable="true">🥕</div>
+                        <div class="waste-item" draggable="true">🥬</div>
+                    </div>
+                </div>
+                
+                <div class="waste-bin" data-waste="plastic">
+                    <div class="bin-icon">🥤</div>
+                    <div class="bin-label">PLASTIC</div>
+                    <div class="waste-items">
+                        <div class="waste-item" draggable="true">🥤</div>
+                        <div class="waste-item" draggable="true">📦</div>
+                        <div class="waste-item" draggable="true">🛍️</div>
+                    </div>
+                </div>
+                
+                <div class="waste-bin" data-waste="metal">
+                    <div class="bin-icon">🔧</div>
+                    <div class="bin-label">METAL</div>
+                    <div class="waste-items">
+                        <div class="waste-item" draggable="true">🔧</div>
+                        <div class="waste-item" draggable="true">⚙️</div>
+                        <div class="waste-item" draggable="true">🔩</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Airlock Disposal System -->
+        <div class="airlock-system">
+            <div class="airlock-display">
+                <div class="status-line" id="statusText">Ready for waste disposal</div>
+                <div class="progress-indicator">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <div class="progress-text" id="progressText">0/9 items disposed</div>
+                </div>
+            </div>
+            
+            <div class="airlock-chamber">
+                <div class="airlock-door left-door"></div>
+                <div class="airlock-door right-door"></div>
+                <div class="airlock-interior">
+                    <div class="disposal-chute">
+                        <div class="chute-opening"></div>
+                        <div class="chute-tunnel"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="disposal-controls">
+                <button class="disposal-btn" id="disposalBtn" disabled>
+                    <span class="btn-icon">🚀</span>
+                    <span class="btn-text">DEPLOY TO SPACE</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Disposal Zone -->
+        <div class="disposal-zone" id="disposalZone">
+            <div class="zone-label">DISPOSAL ZONE</div>
+            <div class="disposal-area" id="disposalArea">
+                <div class="drop-hint">Drop waste items here</div>
+            </div>
+        </div>
     </div>
+
+    <div class="instructions">
+        <p>1. Drag waste items from bins to disposal zone</p>
+        <p>2. Click "DEPLOY TO SPACE" to dispose of collected waste</p>
+        <p>3. Repeat until all waste is disposed</p>
+    </div>
+
     <script src="../js/main.js"></script>
-    <script>document.addEventListener('DOMContentLoaded', () => { const task = new BaseTask('empty-garbage'); document.getElementById('completeBtn').addEventListener('click', () => task.completeTask()); });</script>
+    <script src="../js/empty-garbage.js"></script>
 </body>
 </html>

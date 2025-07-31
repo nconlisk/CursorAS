@@ -1,0 +1,445 @@
+.waste-disposal-container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Waste Collection Area */
+.waste-collection {
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+    border: 3px solid #7f8c8d;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.waste-collection h3 {
+    color: #ecf0f1;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.waste-bins {
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.waste-bin {
+    background: linear-gradient(135deg, #34495e 0%, #2c3e50 100%);
+    border: 2px solid #95a5a6;
+    border-radius: 15px;
+    padding: 20px;
+    min-width: 150px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.waste-bin:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.bin-icon {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.bin-label {
+    color: #ecf0f1;
+    font-weight: bold;
+    margin-bottom: 15px;
+    font-size: 0.9rem;
+}
+
+.waste-items {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.waste-item {
+    background: #ecf0f1;
+    border: 2px solid #bdc3c7;
+    border-radius: 8px;
+    padding: 8px;
+    font-size: 1.2rem;
+    cursor: grab;
+    transition: all 0.2s ease;
+    user-select: none;
+}
+
+.waste-item:hover {
+    transform: scale(1.1);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.waste-item:active {
+    cursor: grabbing;
+    transform: scale(1.05);
+}
+
+.waste-item.dragging {
+    opacity: 0.5;
+    transform: rotate(5deg);
+}
+
+/* Airlock System */
+.airlock-system {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2c2c2c 100%);
+    border: 4px solid #555;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+    position: relative;
+    overflow: hidden;
+}
+
+.airlock-system::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #e74c3c 0%, #f39c12 50%, #27ae60 100%);
+}
+
+.airlock-display {
+    background: #1a1a1a;
+    border: 2px solid #555;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 30px;
+    font-family: 'Courier New', monospace;
+}
+
+.status-line {
+    color: #70a1ff;
+    font-size: 1.3rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+    min-height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.status-line.success {
+    color: #2ed573;
+}
+
+.status-line.error {
+    color: #ff4757;
+    animation: blink 0.5s infinite;
+}
+
+.progress-indicator {
+    margin-top: 15px;
+}
+
+.progress-bar {
+    height: 25px;
+    background: #333;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #ff4757 0%, #ffa502 30%, #2ed573 50%, #ffa502 70%, #ff4757 100%);
+    width: 0%;
+    transition: width 0.3s ease;
+    border-radius: 12px;
+}
+
+.progress-text {
+    text-align: center;
+    color: #bbb;
+    font-size: 0.9rem;
+}
+
+/* Airlock Chamber */
+.airlock-chamber {
+    position: relative;
+    height: 200px;
+    background: #2c2c2c;
+    border: 3px solid #555;
+    border-radius: 15px;
+    margin: 20px 0;
+    overflow: hidden;
+}
+
+.airlock-door {
+    position: absolute;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(135deg, #555 0%, #777 100%);
+    transition: transform 1s ease;
+    z-index: 10;
+}
+
+.left-door {
+    left: 0;
+    transform-origin: left;
+}
+
+.right-door {
+    right: 0;
+    transform-origin: right;
+}
+
+.airlock-door.open {
+    transform: scaleX(0);
+}
+
+.airlock-interior {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #1a1a1a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.disposal-chute {
+    width: 80%;
+    height: 60%;
+    position: relative;
+}
+
+.chute-opening {
+    width: 100%;
+    height: 40px;
+    background: #333;
+    border: 2px solid #555;
+    border-radius: 20px 20px 0 0;
+    position: relative;
+}
+
+.chute-opening::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60%;
+    height: 20px;
+    background: #000;
+    border-radius: 10px;
+}
+
+.chute-tunnel {
+    width: 100%;
+    height: calc(100% - 40px);
+    background: linear-gradient(180deg, #333 0%, #000 100%);
+    border: 2px solid #555;
+    border-top: none;
+    border-radius: 0 0 20px 20px;
+    position: relative;
+}
+
+.chute-tunnel::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    height: 20px;
+    background: #000;
+    border-radius: 10px;
+}
+
+/* Disposal Controls */
+.disposal-controls {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.disposal-btn {
+    background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+    border: none;
+    border-radius: 15px;
+    color: white;
+    font-family: 'Orbitron', monospace;
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding: 15px 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 auto;
+}
+
+.disposal-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(231, 76, 60, 0.3);
+}
+
+.disposal-btn:disabled {
+    background: #555;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.disposal-btn.active {
+    background: linear-gradient(135deg, #27ae60 0%, #2ed573 100%);
+    animation: pulse 0.5s infinite;
+}
+
+.btn-icon {
+    font-size: 1.5rem;
+}
+
+/* Disposal Zone */
+.disposal-zone {
+    background: linear-gradient(135deg, #34495e 0%, #2c3e50 100%);
+    border: 3px dashed #95a5a6;
+    border-radius: 20px;
+    padding: 30px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.disposal-zone.drag-over {
+    border-color: #70a1ff;
+    background: linear-gradient(135deg, #34495e 0%, #2c3e50 100%);
+    box-shadow: 0 0 20px rgba(112, 161, 255, 0.5);
+}
+
+.zone-label {
+    color: #ecf0f1;
+    font-weight: bold;
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+}
+
+.disposal-area {
+    min-height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    position: relative;
+}
+
+.drop-hint {
+    color: #95a5a6;
+    font-style: italic;
+    font-size: 1rem;
+}
+
+.disposal-area.has-items .drop-hint {
+    display: none;
+}
+
+.disposal-item {
+    background: #ecf0f1;
+    border: 2px solid #bdc3c7;
+    border-radius: 8px;
+    padding: 8px;
+    font-size: 1.2rem;
+    animation: dropIn 0.5s ease;
+}
+
+/* Instructions */
+.instructions {
+    text-align: center;
+    margin-top: 30px;
+    color: #bbb;
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+.instructions p {
+    margin: 10px 0;
+}
+
+/* Animations */
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0.3; }
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+@keyframes dropIn {
+    0% {
+        transform: scale(0) rotate(180deg);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.2) rotate(90deg);
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+    }
+}
+
+@keyframes disposeToSpace {
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: translateY(-50px) scale(0.8);
+        opacity: 0.8;
+    }
+    100% {
+        transform: translateY(-200px) scale(0.2);
+        opacity: 0;
+    }
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+    .waste-disposal-container {
+        padding: 10px;
+    }
+    
+    .waste-bins {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .waste-bin {
+        min-width: 200px;
+    }
+    
+    .airlock-chamber {
+        height: 150px;
+    }
+    
+    .disposal-btn {
+        font-size: 1rem;
+        padding: 12px 20px;
+    }
+    
+    .status-line {
+        font-size: 1.1rem;
+    }
+}
