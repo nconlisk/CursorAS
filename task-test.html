@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Functionality Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background: #1a1a1a; color: #fff; }
+        .test-section { margin: 20px 0; padding: 15px; border: 1px solid #333; border-radius: 10px; }
+        .task-link { display: inline-block; margin: 10px; padding: 10px 20px; background: #3498db; color: white; text-decoration: none; border-radius: 5px; }
+        .task-link:hover { background: #2980b9; }
+        .status { margin: 10px 0; padding: 10px; border-radius: 5px; }
+        .status.success { background: #27ae60; }
+        .status.error { background: #e74c3c; }
+        .status.warning { background: #f39c12; }
+        .log { background: #2c2c2c; border: 1px solid #555; padding: 10px; margin: 10px 0; border-radius: 5px; font-family: monospace; max-height: 200px; overflow-y: auto; }
+    </style>
+</head>
+<body>
+    <h1>🔧 Task Functionality Test</h1>
+    
+    <div class="test-section">
+        <h2>Task Links</h2>
+        <a href="tasks/fix-wiring.html" class="task-link" target="_blank">Fix Wiring</a>
+        <a href="tasks/calibrate-distributor.html" class="task-link" target="_blank">Calibrate Distributor</a>
+        <a href="tasks/divert-power.html" class="task-link" target="_blank">Divert Power</a>
+        <a href="tasks/chart-course.html" class="task-link" target="_blank">Chart Course</a>
+        <a href="tasks/stabilize-steering.html" class="task-link" target="_blank">Stabilize Steering</a>
+        <a href="tasks/align-engine.html" class="task-link" target="_blank">Align Engine</a>
+        <a href="tasks/fuel-engines.html" class="task-link" target="_blank">Fuel Engines</a>
+        <a href="tasks/submit-scan.html" class="task-link" target="_blank">Submit Scan</a>
+        <a href="tasks/prime-shields.html" class="task-link" target="_blank">Prime Shields</a>
+        <a href="tasks/clean-o2-filter.html" class="task-link" target="_blank">Clean O2 Filter</a>
+        <a href="tasks/empty-garbage.html" class="task-link" target="_blank">Empty Garbage</a>
+        <a href="tasks/swipe-card.html" class="task-link" target="_blank">Swipe Card</a>
+    </div>
+
+    <div class="test-section">
+        <h2>BaseTask Test</h2>
+        <button id="testBaseTask" style="padding: 10px 20px; background: #3498db; color: white; border: none; border-radius: 5px; cursor: pointer;">Test BaseTask</button>
+        <div id="baseTaskResult" class="status"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>Console Log</h2>
+        <div id="consoleLog" class="log"></div>
+        <button onclick="clearLog()" style="padding: 5px 10px; background: #555; color: white; border: none; border-radius: 3px; cursor: pointer;">Clear Log</button>
+    </div>
+
+    <script>
+        function log(message, type = 'info') {
+            const logDiv = document.getElementById('consoleLog');
+            const timestamp = new Date().toLocaleTimeString();
+            const color = type === 'error' ? '#e74c3c' : type === 'success' ? '#27ae60' : type === 'warning' ? '#f39c12' : '#3498db';
+            logDiv.innerHTML += `<div style="color: ${color}">[${timestamp}] ${message}</div>`;
+            console.log(`[${type.toUpperCase()}] ${message}`);
+        }
+
+        function clearLog() {
+            document.getElementById('consoleLog').innerHTML = '';
+        }
+
+        // Test BaseTask functionality
+        document.getElementById('testBaseTask').addEventListener('click', () => {
+            const resultDiv = document.getElementById('baseTaskResult');
+            
+            try {
+                // Test if BaseTask is available
+                if (typeof BaseTask === 'undefined') {
+                    resultDiv.innerHTML = '❌ BaseTask class not found';
+                    resultDiv.className = 'status error';
+                    log('BaseTask class not found', 'error');
+                    return;
+                }
+
+                // Test BaseTask instantiation
+                const testTask = new BaseTask('test-task');
+                log('BaseTask instantiated successfully', 'success');
+
+                // Test task completion
+                testTask.completeTask();
+                log('BaseTask completeTask() called', 'success');
+
+                resultDiv.innerHTML = '✅ BaseTask functionality working';
+                resultDiv.className = 'status success';
+                log('BaseTask test completed successfully', 'success');
+
+            } catch (error) {
+                resultDiv.innerHTML = `❌ BaseTask error: ${error.message}`;
+                resultDiv.className = 'status error';
+                log(`BaseTask error: ${error.message}`, 'error');
+            }
+        });
+
+        // Monitor for errors
+        window.addEventListener('error', (e) => {
+            log(`JavaScript error: ${e.message}`, 'error');
+        });
+
+        // Log page load
+        document.addEventListener('DOMContentLoaded', () => {
+            log('Task test page loaded', 'info');
+            log('Testing BaseTask availability...', 'info');
+            
+            if (typeof BaseTask !== 'undefined') {
+                log('BaseTask class is available', 'success');
+            } else {
+                log('BaseTask class not found - check main.js loading', 'warning');
+            }
+        });
+    </script>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

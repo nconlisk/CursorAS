@@ -1,0 +1,148 @@
+.navigation-panel {
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+    border: 4px solid #7f8c8d;
+    border-radius: 20px;
+    padding: 40px;
+    max-width: 800px;
+    width: 100%;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    margin: 0 auto;
+}
+
+.star-map {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    background: radial-gradient(ellipse at center, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    border: 3px solid #555;
+    border-radius: 15px;
+    overflow: hidden;
+    margin-bottom: 30px;
+}
+
+.stars {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(2px 2px at 20px 30px, #eee, transparent),
+        radial-gradient(2px 2px at 40px 70px, rgba(255,255,255,0.8), transparent),
+        radial-gradient(1px 1px at 90px 40px, #fff, transparent),
+        radial-gradient(1px 1px at 130px 80px, rgba(255,255,255,0.6), transparent),
+        radial-gradient(2px 2px at 160px 30px, #ddd, transparent);
+    background-repeat: repeat;
+    background-size: 200px 100px;
+    animation: twinkle 3s infinite;
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: 0.8; }
+    50% { opacity: 1; }
+}
+
+.ship {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2rem;
+    cursor: grab;
+    user-select: none;
+    z-index: 10;
+    transition: transform 0.1s ease;
+}
+
+.ship.dragging {
+    cursor: grabbing;
+    transform: translate(-50%, -50%) scale(1.2);
+}
+
+.destination {
+    position: absolute;
+    font-size: 2rem;
+    z-index: 5;
+}
+
+.ship-path, .destination-path {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.nav-controls {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.nav-btn {
+    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-family: 'Orbitron', monospace;
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 12px 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 0 10px;
+}
+
+.nav-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 15px rgba(52, 152, 219, 0.3);
+}
+
+.course-status {
+    margin-top: 15px;
+    color: #70a1ff;
+    font-size: 1.1rem;
+    font-weight: bold;
+    min-height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.course-status.success {
+    color: #2ed573;
+    animation: pulse 0.5s infinite;
+}
+
+.course-status.error {
+    color: #ff4757;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+    .navigation-panel {
+        padding: 20px;
+    }
+    
+    .star-map {
+        height: 300px;
+    }
+    
+    .ship, .destination {
+        font-size: 1.5rem;
+    }
+    
+    .nav-btn {
+        font-size: 0.9rem;
+        padding: 10px 20px;
+    }
+    
+    .course-status {
+        font-size: 1rem;
+    }
+}
