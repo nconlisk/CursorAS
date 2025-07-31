@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Among Us Task Simulator - SIMPLE VERSION</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        .simple-notice {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            color: white;
+            padding: 15px;
+            margin: 20px;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: bold;
+        }
+        .simple-notice::before {
+            content: "🔧 SIMPLE MODE - ";
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 class="title">AMONG US</h1>
+            <h2 class="subtitle">TASK SIMULATOR - SIMPLE VERSION</h2>
+        </header>
+        
+        <div class="simple-notice">
+            This version uses basic onclick handlers and works with any web server!
+        </div>
+        
+        <main class="task-grid">
+            <div class="task-category">
+                <h3>ELECTRICAL</h3>
+                <div class="task-buttons">
+                    <button class="task-btn" onclick="simpleNavigate('fix-wiring')">
+                        <span class="task-icon">⚡</span>
+                        <span class="task-name">Fix Wiring</span>
+                    </button>
+                    <button class="task-btn" onclick="simpleNavigate('calibrate-distributor')">
+                        <span class="task-icon">🔌</span>
+                        <span class="task-name">Calibrate Distributor</span>
+                    </button>
+                    <button class="task-btn" onclick="simpleNavigate('divert-power')">
+                        <span class="task-icon">⚡</span>
+                        <span class="task-name">Divert Power</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="task-category">
+                <h3>NAVIGATION</h3>
+                <div class="task-buttons">
+                    <button class="task-btn" onclick="simpleNavigate('chart-course')">
+                        <span class="task-icon">🧭</span>
+                        <span class="task-name">Chart Course</span>
+                    </button>
+                    <button class="task-btn" onclick="simpleNavigate('stabilize-steering')">
+                        <span class="task-icon">🎯</span>
+                        <span class="task-name">Stabilize Steering</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="task-category">
+                <h3>ENGINES</h3>
+                <div class="task-buttons">
+                    <button class="task-btn" onclick="simpleNavigate('align-engine')">
+                        <span class="task-icon">🔧</span>
+                        <span class="task-name">Align Engine Output</span>
+                    </button>
+                    <button class="task-btn" onclick="simpleNavigate('fuel-engines')">
+                        <span class="task-icon">⛽</span>
+                        <span class="task-name">Fuel Engines</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="task-category">
+                <h3>MEDICAL & SECURITY</h3>
+                <div class="task-buttons">
+                    <button class="task-btn" onclick="simpleNavigate('submit-scan')">
+                        <span class="task-icon">🔍</span>
+                        <span class="task-name">Submit Scan</span>
+                    </button>
+                    <button class="task-btn" onclick="simpleNavigate('prime-shields')">
+                        <span class="task-icon">🛡️</span>
+                        <span class="task-name">Prime Shields</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="task-category">
+                <h3>MAINTENANCE</h3>
+                <div class="task-buttons">
+                    <button class="task-btn" onclick="simpleNavigate('clean-o2-filter')">
+                        <span class="task-icon">🌱</span>
+                        <span class="task-name">Clean O2 Filter</span>
+                    </button>
+                    <button class="task-btn" onclick="simpleNavigate('empty-garbage')">
+                        <span class="task-icon">🗑️</span>
+                        <span class="task-name">Empty Garbage</span>
+                    </button>
+                    <button class="task-btn" onclick="simpleNavigate('swipe-card')">
+                        <span class="task-icon">💳</span>
+                        <span class="task-name">Swipe Card</span>
+                    </button>
+                </div>
+            </div>
+        </main>
+
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+            <span class="progress-text" id="progressText">0/10 Tasks Complete</span>
+        </div>
+
+        <button class="reset-btn" onclick="simpleReset()">Reset All Tasks</button>
+    </div>
+
+    <script>
+        // Simple navigation function
+        function simpleNavigate(taskId) {
+            console.log('Navigating to task:', taskId);
+            window.location.href = `tasks/${taskId}.html`;
+        }
+
+        // Simple reset function
+        function simpleReset() {
+            console.log('Resetting all tasks');
+            localStorage.removeItem('completedTasks');
+            updateSimpleProgress();
+            alert('All tasks have been reset!');
+        }
+
+        // Simple progress tracking
+        function updateSimpleProgress() {
+            try {
+                const completedTasks = JSON.parse(localStorage.getItem('completedTasks') || '[]');
+                const totalTasks = 10;
+                const progress = (completedTasks.length / totalTasks) * 100;
+                
+                const progressFill = document.getElementById('progressFill');
+                const progressText = document.getElementById('progressText');
+                
+                if (progressFill) {
+                    progressFill.style.width = `${progress}%`;
+                }
+                
+                if (progressText) {
+                    progressText.textContent = `${completedTasks.length}/${totalTasks} Tasks Complete`;
+                }
+                
+                // Update button states
+                document.querySelectorAll('.task-btn').forEach(btn => {
+                    const taskId = btn.getAttribute('onclick').match(/simpleNavigate\('([^']+)'\)/)?.[1];
+                    if (taskId && completedTasks.includes(taskId)) {
+                        btn.classList.add('completed');
+                    } else {
+                        btn.classList.remove('completed');
+                    }
+                });
+                
+            } catch (error) {
+                console.error('Error updating progress:', error);
+            }
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('Simple version loaded successfully');
+            updateSimpleProgress();
+        });
+
+        // Listen for storage changes (when tasks are completed)
+        window.addEventListener('storage', () => {
+            updateSimpleProgress();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Among Us Task Simulator - DEBUG MODE</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        .debug-panel {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.9);
+            color: #00ff00;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            padding: 15px;
+            border-radius: 10px;
+            max-width: 300px;
+            z-index: 10000;
+            border: 2px solid #00ff00;
+        }
+        .debug-status {
+            margin: 5px 0;
+            padding: 2px 5px;
+        }
+        .status-ok { color: #00ff00; }
+        .status-error { color: #ff0000; }
+        .status-warning { color: #ffff00; }
+        .debug-btn {
+            background: #333;
+            color: #00ff00;
+            border: 1px solid #00ff00;
+            padding: 5px 10px;
+            margin: 2px;
+            cursor: pointer;
+            font-size: 10px;
+        }
+        .debug-btn:hover {
+            background: #00ff00;
+            color: #000;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 class="title">AMONG US</h1>
+            <h2 class="subtitle">TASK SIMULATOR - DEBUG MODE</h2>
+        </header>
+        
+        <main class="task-grid">
+            <div class="task-category">
+                <h3>ELECTRICAL</h3>
+                <div class="task-buttons">
+                    <button class="task-btn" data-task="fix-wiring" onclick="testButtonClick('fix-wiring')">
+                        <span class="task-icon">⚡</span>
+                        <span class="task-name">Fix Wiring</span>
+                    </button>
+                    <button class="task-btn" data-task="calibrate-distributor" onclick="testButtonClick('calibrate-distributor')">
+                        <span class="task-icon">🔌</span>
+                        <span class="task-name">Calibrate Distributor</span>
+                    </button>
+                    <button class="task-btn" data-task="divert-power" onclick="testButtonClick('divert-power')">
+                        <span class="task-icon">⚡</span>
+                        <span class="task-name">Divert Power</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="task-category">
+                <h3>NAVIGATION</h3>
+                <div class="task-buttons">
+                    <button class="task-btn" data-task="chart-course" onclick="testButtonClick('chart-course')">
+                        <span class="task-icon">🧭</span>
+                        <span class="task-name">Chart Course</span>
+                    </button>
+                    <button class="task-btn" data-task="stabilize-steering" onclick="testButtonClick('stabilize-steering')">
+                        <span class="task-icon">🎯</span>
+                        <span class="task-name">Stabilize Steering</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="task-category">
+                <h3>ENGINES</h3>
+                <div class="task-buttons">
+                    <button class="task-btn" data-task="align-engine" onclick="testButtonClick('align-engine')">
+                        <span class="task-icon">🔧</span>
+                        <span class="task-name">Align Engine Output</span>
+                    </button>
+                    <button class="task-btn" data-task="fuel-engines" onclick="testButtonClick('fuel-engines')">
+                        <span class="task-icon">⛽</span>
+                        <span class="task-name">Fuel Engines</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="task-category">
+                <h3>MEDICAL & SECURITY</h3>
+                <div class="task-buttons">
+                    <button class="task-btn" data-task="submit-scan" onclick="testButtonClick('submit-scan')">
+                        <span class="task-icon">🔍</span>
+                        <span class="task-name">Submit Scan</span>
+                    </button>
+                    <button class="task-btn" data-task="prime-shields" onclick="testButtonClick('prime-shields')">
+                        <span class="task-icon">🛡️</span>
+                        <span class="task-name">Prime Shields</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="task-category">
+                <h3>MAINTENANCE</h3>
+                <div class="task-buttons">
+                    <button class="task-btn" data-task="clean-o2-filter" onclick="testButtonClick('clean-o2-filter')">
+                        <span class="task-icon">🌱</span>
+                        <span class="task-name">Clean O2 Filter</span>
+                    </button>
+                    <button class="task-btn" data-task="empty-garbage" onclick="testButtonClick('empty-garbage')">
+                        <span class="task-icon">🗑️</span>
+                        <span class="task-name">Empty Garbage</span>
+                    </button>
+                    <button class="task-btn" data-task="swipe-card" onclick="testButtonClick('swipe-card')">
+                        <span class="task-icon">💳</span>
+                        <span class="task-name">Swipe Card</span>
+                    </button>
+                </div>
+            </div>
+        </main>
+
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+            <span class="progress-text" id="progressText">0/10 Tasks Complete</span>
+        </div>
+
+        <button class="reset-btn" id="resetProgress" onclick="testResetClick()">Reset All Tasks</button>
+    </div>
+
+    <!-- Debug Panel -->
+    <div class="debug-panel" id="debugPanel">
+        <div style="font-weight: bold; margin-bottom: 10px;">🔧 DEBUG PANEL</div>
+        <div class="debug-status" id="scriptStatus">Loading scripts...</div>
+        <div class="debug-status" id="taskManagerStatus">TaskManager: Checking...</div>
+        <div class="debug-status" id="multiplayerStatus">Multiplayer: Checking...</div>
+        <div class="debug-status" id="buttonStatus">Buttons: Checking...</div>
+        <div class="debug-status" id="errorStatus">Errors: None</div>
+        <div style="margin-top: 10px;">
+            <button class="debug-btn" onclick="runDiagnostics()">Run Tests</button>
+            <button class="debug-btn" onclick="clearConsole()">Clear Console</button>
+            <button class="debug-btn" onclick="toggleDebug()">Hide Panel</button>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/multiplayer.js"></script>
+    <script>
+        // Debug functionality
+        let debugMode = true;
+        let scriptErrors = [];
+        let buttonClicks = 0;
+
+        function updateDebugStatus(elementId, status, message) {
+            const element = document.getElementById(elementId);
+            if (element) {
+                element.textContent = message;
+                element.className = `debug-status status-${status}`;
+            }
+        }
+
+        function testButtonClick(taskId) {
+            buttonClicks++;
+            updateDebugStatus('buttonStatus', 'ok', `Buttons: ${buttonClicks} clicks (${taskId})`);
+            console.log(`Button clicked: ${taskId}`);
+            
+            // Test if TaskManager is available
+            if (window.taskManager) {
+                window.taskManager.navigateToTask(taskId);
+            } else {
+                console.error('TaskManager not available');
+                updateDebugStatus('taskManagerStatus', 'error', 'TaskManager: Not loaded');
+            }
+        }
+
+        function testResetClick() {
+            console.log('Reset button clicked');
+            if (window.taskManager) {
+                window.taskManager.resetAllTasks();
+                updateDebugStatus('buttonStatus', 'ok', 'Buttons: Reset clicked');
+            }
+        }
+
+        function runDiagnostics() {
+            console.log('=== RUNNING DIAGNOSTICS ===');
+            
+            // Check TaskManager
+            if (window.taskManager) {
+                updateDebugStatus('taskManagerStatus', 'ok', 'TaskManager: Loaded');
+                console.log('✅ TaskManager available');
+            } else {
+                updateDebugStatus('taskManagerStatus', 'error', 'TaskManager: Missing');
+                console.error('❌ TaskManager not found');
+            }
+
+            // Check MultiplayerManager
+            if (window.multiplayerManager) {
+                updateDebugStatus('multiplayerStatus', 'ok', 'Multiplayer: Loaded');
+                console.log('✅ MultiplayerManager available');
+            } else {
+                updateDebugStatus('multiplayerStatus', 'warning', 'Multiplayer: Not loaded');
+                console.warn('⚠️ MultiplayerManager not found');
+            }
+
+            // Check buttons
+            const buttons = document.querySelectorAll('.task-btn');
+            if (buttons.length > 0) {
+                updateDebugStatus('buttonStatus', 'ok', `Buttons: ${buttons.length} found`);
+                console.log(`✅ Found ${buttons.length} task buttons`);
+            } else {
+                updateDebugStatus('buttonStatus', 'error', 'Buttons: None found');
+                console.error('❌ No task buttons found');
+            }
+
+            // Check for errors
+            if (scriptErrors.length > 0) {
+                updateDebugStatus('errorStatus', 'error', `Errors: ${scriptErrors.length}`);
+                console.error('❌ Script errors detected:', scriptErrors);
+            } else {
+                updateDebugStatus('errorStatus', 'ok', 'Errors: None');
+                console.log('✅ No script errors');
+            }
+        }
+
+        function clearConsole() {
+            console.clear();
+            scriptErrors = [];
+            updateDebugStatus('errorStatus', 'ok', 'Errors: Cleared');
+        }
+
+        function toggleDebug() {
+            const panel = document.getElementById('debugPanel');
+            if (debugMode) {
+                panel.style.display = 'none';
+                debugMode = false;
+            } else {
+                panel.style.display = 'block';
+                debugMode = true;
+            }
+        }
+
+        // Monitor script loading
+        window.addEventListener('error', (e) => {
+            scriptErrors.push(e.message);
+            updateDebugStatus('errorStatus', 'error', `Errors: ${scriptErrors.length}`);
+            console.error('Script error:', e.message);
+        });
+
+        // Initialize debug panel
+        document.addEventListener('DOMContentLoaded', () => {
+            updateDebugStatus('scriptStatus', 'ok', 'Scripts: Loaded');
+            setTimeout(runDiagnostics, 500);
+        });
+
+        // Auto-run diagnostics after a delay
+        setTimeout(runDiagnostics, 1000);
+    </script>
+</body>
+</html>

@@ -120,11 +120,12 @@
         </div>
     </div>
 
-    <script src="js/multiplayer.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/multiplayer.js"></script>
     <script>
-        // Initialize multiplayer integration
-        document.addEventListener('DOMContentLoaded', () => {
+        // Initialize multiplayer integration with timeout to ensure scripts are loaded
+        setTimeout(() => {
+            document.addEventListener('DOMContentLoaded', () => {
             // Check if player is logged in
             const currentPlayer = window.multiplayerManager.getCurrentPlayer();
             if (currentPlayer && window.multiplayerManager.isGameActive()) {
@@ -194,6 +195,7 @@
                 window.multiplayerManager.callEmergencyMeeting(currentPlayer?.id);
             });
         });
+        }, 100); // 100ms delay to ensure scripts are loaded
     </script>
 </body>
 </html>
