@@ -57,11 +57,12 @@ class SwipeCardTask extends BaseTask {
         this.isDragging = true;
         this.dragStartTime = Date.now();
         this.dragStartX = event.clientX;
+        this.dragStartY = event.clientY;
         this.dragDistance = 0;
         this.hasStartedSwipe = false;
         
         this.card.classList.add('dragging');
-        this.updateStatus('Swipe the card through the reader');
+        this.updateStatus('Insert the card into the reader slot');
         this.resetSpeedIndicator();
     }
 
@@ -69,10 +70,12 @@ class SwipeCardTask extends BaseTask {
         if (!this.isDragging) return;
 
         const currentX = event.clientX;
+        const currentY = event.clientY;
         const deltaX = currentX - this.dragStartX;
+        const deltaY = currentY - this.dragStartY;
         
-        // Update card position
-        this.card.style.transform = `translateX(${deltaX}px) rotate(-5deg) scale(1.1)`;
+        // Update card position with both X and Y movement
+        this.card.style.transform = `translate(${deltaX}px, ${deltaY}px) rotate(-5deg) scale(1.1)`;
         
         // Check if card is in the slot area
         const cardRect = this.card.getBoundingClientRect();
@@ -87,10 +90,13 @@ class SwipeCardTask extends BaseTask {
             this.hasStartedSwipe = true;
             this.dragStartTime = Date.now(); // Reset timer when entering slot
             this.dragStartX = currentX; // Reset start position
+            this.dragStartY = currentY; // Reset start position
+            this.updateStatus('Now swipe the card through the reader');
         }
         
         if (this.hasStartedSwipe) {
-            this.dragDistance = Math.abs(currentX - this.dragStartX);
+            // Calculate total distance including both X and Y movement
+            this.dragDistance = Math.sqrt(Math.pow(currentX - this.dragStartX, 2) + Math.pow(currentY - this.dragStartY, 2));
             this.calculateSpeed();
         }
     }
@@ -143,8 +149,8 @@ class SwipeCardTask extends BaseTask {
         this.speedFill.style.background = '#2ed573';
         playSound('success');
         
-        // Animate card completion
-        this.card.style.transform = 'translateX(200px) rotate(0deg) scale(1)';
+        // Animate card being inserted into the reader
+        this.card.style.transform = 'translate(0px, -50px) rotate(0deg) scale(0.8)';
         this.card.style.opacity = '0.7';
         
         setTimeout(() => {

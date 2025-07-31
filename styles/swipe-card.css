@@ -98,6 +98,8 @@
     border-radius: 30px;
     margin: 30px 0;
     display: flex;
+    animation: slotPulse 2s infinite;
+}
     align-items: center;
     justify-content: center;
     overflow: hidden;
@@ -250,6 +252,17 @@
     }
 }
 
+@keyframes slotPulse {
+    0%, 100% { 
+        border-color: #555;
+        box-shadow: 0 0 0 rgba(112, 161, 255, 0);
+    }
+    50% { 
+        border-color: #70a1ff;
+        box-shadow: 0 0 20px rgba(112, 161, 255, 0.5);
+    }
+}
+
 /* Mobile optimizations */
 @media (max-width: 768px) {
     .card-reader {
@@ -301,5 +314,16 @@
     .id-card {
         width: 280px;
         height: 170px;
+    }
+}
+
+@keyframes slotPulse {
+    0%, 100% { 
+        border-color: #555;
+        box-shadow: 0 0 0 rgba(112, 161, 255, 0);
+    }
+    50% { 
+        border-color: #70a1ff;
+        box-shadow: 0 0 20px rgba(112, 161, 255, 0.5);
     }
 }
