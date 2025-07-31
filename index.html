@@ -16,7 +16,7 @@
             <h2 class="subtitle">TASK SIMULATOR</h2>
         </header>
         
-        <main class="task-grid">
+        <main class="task-grid" id="taskGrid">
             <div class="task-category">
                 <h3>ELECTRICAL</h3>
                 <div class="task-buttons">
@@ -103,6 +103,11 @@
 
         <button class="reset-btn" id="resetProgress">Reset All Tasks</button>
         
+        <!-- Test button for debugging -->
+        <button id="testBtn" style="margin: 10px; padding: 10px; background: #ff4757; color: white; border: none; border-radius: 5px; cursor: pointer;" onclick="console.log('Test button clicked!')">
+            Test Button
+        </button>
+        
         <!-- Player Info Panel -->
         <div class="player-info" id="playerInfo" style="display: none;">
             <div class="player-id-display" id="playerIdDisplay"></div>
@@ -136,6 +141,8 @@
         
         // Initialize multiplayer integration with timeout to ensure scripts are loaded
         setTimeout(() => {
+            // Only run multiplayer code if multiplayerManager exists and is active
+            if (window.multiplayerManager && window.multiplayerManager.getCurrentPlayer()) {
             // Check if player is logged in
             const currentPlayer = window.multiplayerManager.getCurrentPlayer();
             if (currentPlayer && window.multiplayerManager.isGameActive()) {
@@ -204,6 +211,20 @@
             document.getElementById('emergencyMeetingMain')?.addEventListener('click', () => {
                 window.multiplayerManager.callEmergencyMeeting(currentPlayer?.id);
             });
+            } else {
+                // No multiplayer session - ensure TaskManager is working properly
+                console.log('No multiplayer session - TaskManager should be active');
+                
+                // Verify TaskManager is working
+                if (window.taskManager) {
+                    console.log('TaskManager is available and working');
+                } else {
+                    console.error('TaskManager not found - reinitializing');
+                    if (document.querySelector('.task-grid')) {
+                        window.taskManager = new TaskManager();
+                    }
+                }
+            }
         });
         }, 200); // 200ms delay to ensure scripts are loaded
     </script>

@@ -22,12 +22,18 @@ class TaskManager {
         const taskButtons = document.querySelectorAll('.task-btn');
         console.log(`Found ${taskButtons.length} task buttons to bind events to`);
         
-        taskButtons.forEach(btn => {
+        taskButtons.forEach((btn, index) => {
+            console.log(`Binding event to button ${index + 1}: ${btn.dataset.task}`);
             btn.addEventListener('click', (e) => {
                 const taskId = e.currentTarget.dataset.task;
                 console.log(`Task button clicked: ${taskId}`);
                 this.navigateToTask(taskId);
             });
+            
+            // Also add a test click handler to see if the button is clickable
+            btn.addEventListener('click', (e) => {
+                console.log(`Button ${btn.dataset.task} was clicked!`);
+            }, { capture: true });
         });
 
         // Reset button
