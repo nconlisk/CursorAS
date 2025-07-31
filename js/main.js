@@ -19,9 +19,13 @@ class TaskManager {
 
     bindEvents() {
         // Task button clicks
-        document.querySelectorAll('.task-btn').forEach(btn => {
+        const taskButtons = document.querySelectorAll('.task-btn');
+        console.log(`Found ${taskButtons.length} task buttons to bind events to`);
+        
+        taskButtons.forEach(btn => {
             btn.addEventListener('click', (e) => {
                 const taskId = e.currentTarget.dataset.task;
+                console.log(`Task button clicked: ${taskId}`);
                 this.navigateToTask(taskId);
             });
         });
@@ -44,6 +48,7 @@ class TaskManager {
     }
 
     navigateToTask(taskId) {
+        console.log(`Navigating to task: ${taskId}`);
         window.location.href = `tasks/${taskId}.html`;
     }
 
@@ -242,7 +247,8 @@ function addTouchFeedback() {
 document.addEventListener('DOMContentLoaded', () => {
     // Check if we're on the main page
     if (document.querySelector('.task-grid')) {
-        new TaskManager();
+        window.taskManager = new TaskManager();
+        console.log('TaskManager initialized and available as window.taskManager');
     }
     
     // Add touch feedback to all pages

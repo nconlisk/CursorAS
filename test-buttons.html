@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Button Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .test-btn { 
+            background: #3498db; 
+            color: white; 
+            border: none; 
+            padding: 10px 20px; 
+            margin: 10px; 
+            border-radius: 5px; 
+            cursor: pointer; 
+        }
+        .test-btn:hover { background: #2980b9; }
+        .log { 
+            background: #f8f9fa; 
+            border: 1px solid #dee2e6; 
+            padding: 10px; 
+            margin: 10px 0; 
+            border-radius: 5px; 
+            font-family: monospace; 
+            max-height: 200px; 
+            overflow-y: auto; 
+        }
+    </style>
+</head>
+<body>
+    <h1>Button Functionality Test</h1>
+    
+    <div>
+        <button class="test-btn" onclick="testClick('test1')">Test Button 1</button>
+        <button class="test-btn" onclick="testClick('test2')">Test Button 2</button>
+        <button class="test-btn" data-task="fix-wiring">Task Button (data-task)</button>
+    </div>
+    
+    <div class="log" id="log"></div>
+    
+    <script>
+        function log(message) {
+            const logDiv = document.getElementById('log');
+            logDiv.innerHTML += new Date().toLocaleTimeString() + ': ' + message + '<br>';
+            console.log(message);
+        }
+        
+        function testClick(buttonId) {
+            log(`Button clicked: ${buttonId}`);
+        }
+        
+        // Test event listener attachment
+        document.addEventListener('DOMContentLoaded', () => {
+            log('DOM loaded');
+            
+            // Test direct onclick
+            const testButtons = document.querySelectorAll('.test-btn');
+            log(`Found ${testButtons.length} test buttons`);
+            
+            // Test data-task button
+            const taskButton = document.querySelector('[data-task]');
+            if (taskButton) {
+                log(`Found task button with data-task: ${taskButton.dataset.task}`);
+                
+                // Add event listener
+                taskButton.addEventListener('click', (e) => {
+                    log(`Task button clicked via event listener: ${e.target.dataset.task}`);
+                });
+            }
+        });
+        
+        // Test if JavaScript is working
+        log('Script loaded');
+    </script>
+</body>
+</html>
