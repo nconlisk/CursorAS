@@ -77,9 +77,12 @@
             </div>
             
             <div class="disposal-controls">
-                <button class="disposal-btn" id="disposalBtn" disabled>
+                <button class="disposal-btn" id="disposalBtn" disabled onclick="console.log('Button clicked via onclick')">
                     <span class="btn-icon">🚀</span>
                     <span class="btn-text">DEPLOY TO SPACE</span>
+                </button>
+                <button style="margin-top: 10px; padding: 10px; background: #3498db; color: white; border: none; border-radius: 5px;" onclick="console.log('Test button clicked')">
+                    Test Button
                 </button>
             </div>
         </div>

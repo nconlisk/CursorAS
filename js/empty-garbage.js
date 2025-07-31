@@ -8,6 +8,14 @@ class WasteDisposalTask extends BaseTask {
         this.progressText = document.getElementById('progressText');
         this.disposalZone = document.getElementById('disposalZone');
         
+        console.log('WasteDisposalTask constructor - Elements found:');
+        console.log('disposalArea:', this.disposalArea);
+        console.log('disposalBtn:', this.disposalBtn);
+        console.log('statusText:', this.statusText);
+        console.log('progressFill:', this.progressFill);
+        console.log('progressText:', this.progressText);
+        console.log('disposalZone:', this.disposalZone);
+        
         this.disposalItems = [];
         this.totalItems = 9;
         this.disposedItems = 0;
@@ -39,7 +47,15 @@ class WasteDisposalTask extends BaseTask {
     }
 
     bindDisposalEvents() {
-        this.disposalBtn.addEventListener('click', () => this.disposeWaste());
+        console.log('Binding disposal events, button found:', this.disposalBtn);
+        if (this.disposalBtn) {
+            this.disposalBtn.addEventListener('click', () => {
+                console.log('Disposal button clicked!');
+                this.disposeWaste();
+            });
+        } else {
+            console.error('Disposal button not found!');
+        }
     }
 
     startDrag(event) {
@@ -113,7 +129,11 @@ class WasteDisposalTask extends BaseTask {
     }
 
     disposeWaste() {
-        if (this.isDisposing || this.disposalItems.length === 0) return;
+        console.log('disposeWaste called, isDisposing:', this.isDisposing, 'items:', this.disposalItems.length);
+        if (this.isDisposing || this.disposalItems.length === 0) {
+            console.log('Disposal blocked - isDisposing:', this.isDisposing, 'items:', this.disposalItems.length);
+            return;
+        }
         
         this.isDisposing = true;
         this.disposalBtn.classList.add('active');
